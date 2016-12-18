@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="771be885-5179-455f-948c-7b5a41216a24" activeEnvironment="Default" name="CompetitionWebService?wsdl" resourceRoot="" soapui-version="5.2.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="45feb962-b821-4616-ae59-fe5f4fe7ddee" wsaVersion="NONE" name="CompetitionBinding" type="wsdl" bindingName="{http://www.competitionservice.com/135045/competition}CompetitionBinding" soapVersion="1_1" anonymous="optional" definition="http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService?wsdl"><con:part><con:url>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService?wsdl</con:url><con:content><![CDATA[<!--Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown.-->
+<wsdl:definitions targetNamespace="http://www.competitionservice.com/135045/competition" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.competitionservice.com/135045/competition" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:sp="http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://www.competitionservice.com/135045/competition" elementFormDefault="qualified">
+      <xs:complexType name="competitionType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="competitionNo" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="competitionLocation" type="xs:string"/>
+          <xs:element name="competitionDate" type="xs:date"/>
+          <xs:element name="dueDate" type="xs:date"/>
+          <xs:element name="competitionAthleteList" type="tns:competitionAthleteListType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="athleteType">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="xs:string"/>
+          <xs:element name="gender">
+            <xs:simpleType>
+              <xs:restriction base="xs:string">
+                <xs:pattern value="male|female"/>
+              </xs:restriction>
+            </xs:simpleType>
+          </xs:element>
+          <xs:element name="number" type="xs:integer"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="competitionAthleteType">
+        <xs:sequence>
+          <xs:element name="athlete" type="tns:athleteType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="competitionAthleteListType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="competitionAthlete" type="tns:competitionAthleteType"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="getAthleteRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAthleteResponse" type="tns:athleteType"/>
+      <xs:element name="addAthleteRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="gender" type="xs:string"/>
+            <xs:element name="number" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addAthleteResponse" type="tns:athleteType"/>
+      <xs:element name="getAthleteListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="gender" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAthleteListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="athlete" type="tns:athleteType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCompetitionRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCompetitionResponse" type="tns:competitionType"/>
+      <xs:element name="addCompetitionRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="competitionNo" type="xs:integer"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="competitionLocation" type="xs:string"/>
+            <xs:element name="competitionDate" type="xs:date"/>
+            <xs:element name="dueDate" type="xs:date"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addCompetitionResponse" type="tns:competitionType"/>
+      <xs:element name="getCompetitionListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element minOccurs="0" maxOccurs="1" name="competitionLocation" type="xs:string"/>
+            <xs:element minOccurs="0" name="hasRelatedAthlete">
+              <xs:simpleType>
+                <xs:restriction base="xs:string">
+                  <xs:pattern value="jah|ei"/>
+                </xs:restriction>
+              </xs:simpleType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCompetitionListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="competition" type="tns:competitionType"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCompetitionAthleteListRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="competitionId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getCompetitionAthleteListResponse" type="tns:competitionAthleteListType"/>
+      <xs:element name="addCompetitionAthleteRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+            <xs:element name="competitionId" type="xs:integer"/>
+            <xs:element name="athleteId" type="xs:integer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addCompetitionAthleteResponse" type="tns:competitionAthleteType"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getAthleteMessageRequest">
+    <wsdl:part name="parameter" element="tns:getAthleteRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getAthleteMessageResponse">
+    <wsdl:part name="parameter" element="tns:getAthleteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addAthleteMessageRequest">
+    <wsdl:part name="parameter" element="tns:addAthleteRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addAthleteMessageResponse">
+    <wsdl:part name="parameter" element="tns:addAthleteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getAthleteListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getAthleteListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getAthleteListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getAthleteListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCompetitionMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCompetitionRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCompetitionMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCompetitionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addCompetitionMessageRequest">
+    <wsdl:part name="parameter" element="tns:addCompetitionRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addCompetitionMessageResponse">
+    <wsdl:part name="parameter" element="tns:addCompetitionResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCompetitionListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCompetitionListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCompetitionListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCompetitionListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getCompetitionAthleteListMessageRequest">
+    <wsdl:part name="parameter" element="tns:getCompetitionAthleteListRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getCompetitionAthleteListMessageResponse">
+    <wsdl:part name="parameter" element="tns:getCompetitionAthleteListResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addCompetitionAthleteMessageRequest">
+    <wsdl:part name="parameter" element="tns:addCompetitionAthleteRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addCompetitionAthleteMessageResponse">
+    <wsdl:part name="parameter" element="tns:addCompetitionAthleteResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="CompetitionPortType">
+    <wsdl:operation name="getAthlete">
+      <wsdl:input message="tns:getAthleteMessageRequest"/>
+      <wsdl:output message="tns:getAthleteMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addAthlete">
+      <wsdl:input message="tns:addAthleteMessageRequest"/>
+      <wsdl:output message="tns:addAthleteMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getAthleteList">
+      <wsdl:input message="tns:getAthleteListMessageRequest"/>
+      <wsdl:output message="tns:getAthleteListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCompetition">
+      <wsdl:input message="tns:getCompetitionMessageRequest"/>
+      <wsdl:output message="tns:getCompetitionMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addCompetition">
+      <wsdl:input message="tns:addCompetitionMessageRequest"/>
+      <wsdl:output message="tns:addCompetitionMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCompetitionList">
+      <wsdl:input message="tns:getCompetitionListMessageRequest"/>
+      <wsdl:output message="tns:getCompetitionListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="getCompetitionAthleteList">
+      <wsdl:input message="tns:getCompetitionAthleteListMessageRequest"/>
+      <wsdl:output message="tns:getCompetitionAthleteListMessageResponse"/>
+    </wsdl:operation>
+    <wsdl:operation name="addCompetitionAthlete">
+      <wsdl:input message="tns:addCompetitionAthleteMessageRequest"/>
+      <wsdl:output message="tns:addCompetitionAthleteMessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CompetitionBinding" type="tns:CompetitionPortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAthlete">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addAthlete">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAthleteList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCompetition">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCompetition">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCompetitionList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCompetitionAthleteList">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCompetitionAthlete">
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CompetitionService">
+    <wsdl:port name="CompetitionPort" binding="tns:CompetitionBinding">
+      <soap:address location="http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsp:Policy wsu:Id="CompetitionBinding_getAthlete_Input_Policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CompetitionBinding_getAthlete_Output_Policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CompetitionBinding_getCompetition_Input_Policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CompetitionBinding_getCompetition_Output_Policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CompetitionBinding_addCompetition_Input_Policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="CompetitionBinding_addCompetition_Output_Policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:EncryptedParts>
+          <sp:Body/>
+        </sp:EncryptedParts>
+        <sp:SignedParts>
+          <sp:Body/>
+        </sp:SignedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint></con:endpoints><con:operation id="59ba3a10-87a3-48be-bcde-d5f1da989798" isOneWay="false" action="" name="addAthlete" bindingOperationName="addAthlete" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="5273d85d-b1ba-4dae-92d3-82fedfa6eae1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:addAthleteRequest>
+         <com:token>salajane</com:token>
+         <com:name>Mari Märnd</com:name>
+         <com:gender>female</com:gender>
+         <com:number>1</com:number>
+      </com:addAthleteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/addAthleteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c9edd7db-b9ea-4fff-ba5a-b62afd1cb11f" isOneWay="false" action="" name="addCompetition" bindingOperationName="addCompetition" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="48e9759a-9097-4f56-9869-0815bc4e2497" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:addCompetitionRequest>
+         <com:token>?</com:token>
+         <com:competitionNo>?</com:competitionNo>
+         <com:name>?</com:name>
+         <com:competitionLocation>?</com:competitionLocation>
+         <com:competitionDate>?</com:competitionDate>
+         <com:dueDate>?</com:dueDate>
+      </com:addCompetitionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/addCompetitionRequest"/></con:call></con:operation><con:operation id="39444e1c-f280-4cd4-a897-669a4d364ffc" isOneWay="false" action="" name="addCompetitionAthlete" bindingOperationName="addCompetitionAthlete" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="afb3f730-26d1-4412-a901-55a5a6bc18d1" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:addCompetitionAthleteRequest>
+         <com:token>salajane</com:token>
+         <com:competitionId>1</com:competitionId>
+         <com:athleteId>1</com:athleteId>
+      </com:addCompetitionAthleteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/addCompetitionAthleteRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="3b59ccf5-87c2-42d7-aaf8-8bbf615bb950" isOneWay="false" action="" name="getAthlete" bindingOperationName="getAthlete" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="e956bbcc-0528-4e68-9fd9-41b611852aae" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getAthleteRequest>
+         <com:token>?</com:token>
+         <com:id>?</com:id>
+      </com:getAthleteRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/getAthleteRequest"/></con:call></con:operation><con:operation id="1d5793a8-3b48-41b8-b0ba-67be96bf333b" isOneWay="false" action="" name="getAthleteList" bindingOperationName="getAthleteList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="d5487bc0-2b5c-4cd1-bea5-52764a1b8fb9" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getAthleteListRequest>
+         <com:token>?</com:token>
+         <!--Optional:-->
+         <com:gender>?</com:gender>
+      </com:getAthleteListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/getAthleteListRequest"/></con:call></con:operation><con:operation id="8d5d4f11-ad21-4723-a669-bb57413cc6ca" isOneWay="false" action="" name="getCompetition" bindingOperationName="getCompetition" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="1f0dde79-dfd9-4f04-858e-99a213a1b6b7" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getCompetitionRequest>
+         <com:token>?</com:token>
+         <com:id>?</com:id>
+      </com:getCompetitionRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/getCompetitionRequest"/></con:call></con:operation><con:operation id="2a08c05a-83ce-4df3-a1d3-1f04bc26d5f7" isOneWay="false" action="" name="getCompetitionAthleteList" bindingOperationName="getCompetitionAthleteList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="329f6def-aa09-4c63-99a5-edbd59a8405d" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getCompetitionAthleteListRequest>
+         <com:token>salajane</com:token>
+         <com:competitionId>1</com:competitionId>
+      </com:getCompetitionAthleteListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/getCompetitionAthleteListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation id="c0d22e51-2b6d-4d71-9c1e-4e5b1a9e8a0f" isOneWay="false" action="" name="getCompetitionList" bindingOperationName="getCompetitionList" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="bf148387-cb1d-4ed8-b391-7ae0dd39db33" name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://taanieli-macbook-pro.local:8080/CompetitionWebService/CompetitionService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:com="http://www.competitionservice.com/135045/competition">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <com:getCompetitionListRequest>
+         <com:token>salajane</com:token>
+         <!--Optional:-->
+         <com:competitionLocation>Narva</com:competitionLocation>
+         <!--Optional:-->
+         <com:hasRelatedAthlete>?</com:hasRelatedAthlete>
+      </com:getCompetitionListRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://www.competitionservice.com/135045/competition/CompetitionPortType/getCompetitionListRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

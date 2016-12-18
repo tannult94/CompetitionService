@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:tns="http://www.competitionservice.com/135045/competition"
+	targetNamespace="http://www.competitionservice.com/135045/competition">
+	<wsdl:types>
+		<xs:schema  targetNamespace="http://www.competitionservice.com/135045/competition" elementFormDefault="qualified">
+			<xs:complexType name ="competitionType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="competitionNo" type="xs:integer"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="competitionLocation" type="xs:string"/>
+					<xs:element name="competitionDate" type="xs:date"/>
+					<xs:element name="dueDate" type="xs:date"/>
+					<xs:element name="competitionAthleteList" type="tns:competitionAthleteListType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="athleteType">
+				<xs:sequence>
+					<xs:element name="id" type="xs:integer"/>
+					<xs:element name="name" type="xs:string"/>
+					<xs:element name="gender" type="xs:string"/>
+					<xs:element name="number" type="xs:integer"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="competitionAthleteType">
+				<xs:sequence>
+					<xs:element name="athlete" type="tns:athleteType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:complexType name ="competitionAthleteListType">
+				<xs:sequence>
+					<xs:element minOccurs="0" maxOccurs="unbounded" name="competitionAthlete" type="tns:competitionAthleteType"/>
+				</xs:sequence>
+			</xs:complexType>
+			<xs:element name="getAthleteRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getAthleteResponse" type="tns:athleteType"/>
+			<xs:element name="addAthleteRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="name" type="xs:string"/>
+						<xs:element name="gender" type="xs:string"/>
+						<xs:element name="number" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addAthleteResponse" type="tns:athleteType"/>
+			<xs:element name="getAthleteListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getAthleteListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="athlete" type="tns:athleteType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCompetitionRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="id" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCompetitionResponse" type="tns:competitionType"/>
+			<xs:element name="addCompetitionRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="competitionNo" type="xs:integer"/>
+						<xs:element name="name" type="xs:string"/>
+						<xs:element name="competitionLocation" type="xs:string"/>
+						<xs:element name="competitionDate" type="xs:date"/>
+						<xs:element name="dueDate" type="xs:date"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addCompetitionResponse" type="tns:competitionType"/>
+			<xs:element name="getCompetitionListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="startDate" type="xs:date"/>
+						<xs:element name="endDate" type="xs:date"/>
+						<xs:element minOccurs="0" name="hasRelatedAthlete">
+						  <xs:simpleType>
+							<xs:restriction base="xs:string">
+							  <xs:pattern value="jah|ei"/>
+							</xs:restriction>
+						  </xs:simpleType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCompetitionListResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="0" maxOccurs="unbounded" name="competition" type="tns:competitionType"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCompetitionAthleteListRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="competitionId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getCompetitionAthleteListResponse" type="tns:competitionAthleteListType"/>
+			<xs:element name="addCompetitionAthleteRequest">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="token" type="xs:string"/>
+						<xs:element name="competitionId" type="xs:integer"/>
+						<xs:element name="athleteId" type="xs:integer"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="addCompetitionAthleteResponse" type="tns:competitionAthleteType"/>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="getAthleteMessageRequest">
+		<wsdl:part name="parameter" element="tns:getAthleteRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getAthleteMessageResponse">
+		<wsdl:part name="parameter" element="tns:getAthleteResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addAthleteMessageRequest">
+		<wsdl:part name="parameter" element="tns:addAthleteRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addAthleteMessageResponse">
+		<wsdl:part name="parameter" element="tns:addAthleteResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getAthleteListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getAthleteListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getAthleteListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getAthleteListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getCompetitionMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCompetitionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCompetitionMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCompetitionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addCompetitionMessageRequest">
+		<wsdl:part name="parameter" element="tns:addCompetitionRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addCompetitionMessageResponse">
+		<wsdl:part name="parameter" element="tns:addCompetitionResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getCompetitionListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCompetitionListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCompetitionListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCompetitionListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="getCompetitionAthleteListMessageRequest">
+		<wsdl:part name="parameter" element="tns:getCompetitionAthleteListRequest"/>
+	</wsdl:message>
+	<wsdl:message name="getCompetitionAthleteListMessageResponse">
+		<wsdl:part name="parameter" element="tns:getCompetitionAthleteListResponse"/>
+	</wsdl:message>
+	<wsdl:message name="addCompetitionAthleteMessageRequest">
+		<wsdl:part name="parameter" element="tns:addCompetitionAthleteRequest"/>
+	</wsdl:message>
+	<wsdl:message name="addCompetitionAthleteMessageResponse">
+		<wsdl:part name="parameter" element="tns:addCompetitionAthleteResponse"/>
+	</wsdl:message>
+	<wsdl:portType name="CompetitionPortType">
+		<wsdl:operation name="getAthlete">
+			<wsdl:input message="tns:getAthleteMessageRequest"/>
+			<wsdl:output message="tns:getAthleteMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addAthlete">
+			<wsdl:input message="tns:addAthleteMessageRequest"/>
+			<wsdl:output message="tns:addAthleteMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getAthleteList">
+			<wsdl:input message="tns:getAthleteListMessageRequest"/>
+			<wsdl:output message="tns:getAthleteListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getCompetition">
+			<wsdl:input message="tns:getCompetitionMessageRequest"/>
+			<wsdl:output message="tns:getCompetitionMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addCompetition">
+			<wsdl:input message="tns:addCompetitionMessageRequest"/>
+			<wsdl:output message="tns:addCompetitionMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getCompetitionList">
+			<wsdl:input message="tns:getCompetitionListMessageRequest"/>
+			<wsdl:output message="tns:getCompetitionListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getCompetitionAthleteList">
+			<wsdl:input message="tns:getCompetitionAthleteListMessageRequest"/>
+			<wsdl:output message="tns:getCompetitionAthleteListMessageResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addCompetitionAthlete">
+			<wsdl:input message="tns:addCompetitionAthleteMessageRequest"/>
+			<wsdl:output message="tns:addCompetitionAthleteMessageResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CompetitionBinding" type="tns:CompetitionPortType">
+		<soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getAthlete">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addAthlete">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAthleteList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCompetition">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addCompetition">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCompetitionList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCompetitionAthleteList">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addCompetitionAthlete">
+			<wsdl:input>
+				<soap:body use="literal"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CompetitionService">
+		<wsdl:port name="CompetitionPort" binding="tns:CompetitionBinding">
+			<soap:address location="Empty"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

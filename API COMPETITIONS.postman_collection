@@ -1,0 +1,264 @@
+{
+	"variables": [],
+	"info": {
+		"name": "API COMPETITIONS",
+		"_postman_id": "5652d465-631d-819a-1a15-841af291365f",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "addCompetition",
+			"description": "Add new competition",
+			"item": [
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/?token=salajane",
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/?token=salajane",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\":1,\n\t\"competitionNo\":1,\n\t\"name\":\"Tartu Karikavõistlus\",\n\t\"competitionLocation\":\"Tartu\",\n\t\"competitionDate\":\"2016-06-22\",\n\t\"dueDate\":\"2016-06-23\"\n}\n\n"
+						},
+						"description": "Add new competition"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/?token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"competitionLocation\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/?token=salajane",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"competitionNo\":1,\n\t\"name\":\"Narva KV\",\n\t\"competitionLocation\":\"Narva\",\n\t\"competitionDate\":\"2016-12-30\",\n\t\"dueDate\":\"2016-30-15\"\n}\n\n"
+						},
+						"description": "Add new competition"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "addCompetitionAthlete",
+			"description": "Add athlete to competition",
+			"item": [
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/0/athletes/?token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"id\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/athletes/?token=salajane",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"athlete\":{\n\t\t\"id\":1\n\t}\n}\n"
+						},
+						"description": "Add new athlete to competition"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/athletes/?token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"athlete\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/athletes/?token=salajane",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"athlete\":{\n\t\t\"id\":2\n\t}\n}\n"
+						},
+						"description": "Add athlete with id:1 to competition with id:1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getCompetition",
+			"description": "Get competition",
+			"item": [
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/?token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"competitionLocation\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/?token=salajane",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get competition with id 1"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/?token=salajaneG",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"athlete\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/?token=salajane",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get competition with id:1"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getCompetitionAthete",
+			"description": "Get all current competition athletes",
+			"item": [
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/athletes/?token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"competitionAthlete\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/1/athletes/?token=salajane",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get all athlets from competition with id:1"
+					},
+					"response": []
+				},
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/2/athletes/?token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"competitionAthlete\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/2/athletes/?token=salajane",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get all athletes from competition with id:2"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "getCompetitionList",
+			"description": "",
+			"item": [
+				{
+					"name": "http://localhost:8080/CompetitionWebService/webresources/competitions/?competitionLocation=Tartu&token=salajane",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Body matches string\"] = responseBody.has(\"competition\");"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "http://localhost:8080/CompetitionWebService/webresources/competitions/?competitionLocation=Tartu&token=salajane",
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"description": "Get all competitions that are held in Tartu"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
